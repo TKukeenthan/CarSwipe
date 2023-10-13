@@ -1,0 +1,8 @@
+Container(
+      
+      child: Stack(
+        children: [SvgPicture.asset('assets/createAd/right.svg')
+        Text('')
+        ],
+      ),
+    );
