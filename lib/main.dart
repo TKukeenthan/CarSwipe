@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'Provider/CarTypeProvider.dart';
 import 'mainScreen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CarTypeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

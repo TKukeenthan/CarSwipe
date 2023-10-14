@@ -15,7 +15,7 @@ class ContactWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Contact details',
+              const Text('Contact details',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -25,8 +25,8 @@ class ContactWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     SvgPicture.asset('assets/createAd/Component 20 (1).svg'),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0),
                       child: Text(
                         'Add new',
                         style: TextStyle(color: Color(0xff8A8D9F)),
@@ -37,7 +37,7 @@ class ContactWidget extends StatelessWidget {
               )
             ],
           ),
-          Text(
+          const Text(
               'These contacts will be shown in the your ad which allow customers to contact you to close the deal.',
               style: TextStyle(
                   fontSize: 12,
@@ -50,7 +50,7 @@ class ContactWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text('0771245657',
+                    const Text('0771245657',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -60,7 +60,7 @@ class ContactWidget extends StatelessWidget {
                       child: SvgPicture.asset(
                           'assets/createAd/ep_success-filled.svg'),
                     ),
-                    Text("Verified",
+                    const Text("Verified",
                         style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -71,7 +71,7 @@ class ContactWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             color: Color(0xff18191A),
           ),
           Padding(
@@ -81,7 +81,7 @@ class ContactWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text('0771245657',
+                    const Text('0771245657',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -91,7 +91,7 @@ class ContactWidget extends StatelessWidget {
                       child: SvgPicture.asset(
                           'assets/createAd/ep_success-filled.svg'),
                     ),
-                    Text("Verified",
+                    const Text("Verified",
                         style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -102,22 +102,23 @@ class ContactWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             color: Color(0xff18191A),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Hide contact details',
+                  const Text('Hide contact details',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           color: Colors.white)),
                   Container(
                     width: screenWidth(context, 282),
-                    child: Text(
+                    child: const Text(
                         'Contact numbers will not be visible only for this ad. The numbers will nor be deleted from the application.',
                         style: TextStyle(
                             fontSize: 12,
@@ -126,10 +127,33 @@ class ContactWidget extends StatelessWidget {
                   )
                 ],
               ),
+              const SwitchButton()
             ],
           ),
         ],
       ),
     );
+  }
+}
+
+class SwitchButton extends StatefulWidget {
+  const SwitchButton({super.key});
+
+  @override
+  State<SwitchButton> createState() => _SwitchButtonState();
+}
+
+class _SwitchButtonState extends State<SwitchButton> {
+  bool light = true;
+  @override
+  Widget build(BuildContext context) {
+    return Switch(
+        value: light,
+        activeColor: Colors.blue,
+        onChanged: (bool value) {
+          setState(() {
+            light = value;
+          });
+        });
   }
 }

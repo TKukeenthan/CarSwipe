@@ -26,6 +26,8 @@ class Description extends StatelessWidget {
               fillColor: const Color(0xff0e0f10),
               contentPadding: const EdgeInsets.all(8.0),
               isDense: true,
+              hintText: 'Specific information about the car...',
+              hintStyle: TextStyle(color: Color(0xff999A9B)),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),

@@ -1,3 +1,4 @@
+import 'package:carswipe/Screens/WishList/filter/Filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:carswipe/Config/appSize.dart';
@@ -59,7 +60,18 @@ class _WishlistScreenState extends State<WishlistScreen> {
             ],
           ),
           // Image.asset should be replaced with your actual image asset.
-          SvgPicture.asset('assets/wishList/iconamoon_sorting-center.svg')
+          IconButton(
+            icon: SvgPicture.asset(
+                'assets/wishList/iconamoon_sorting-center.svg'),
+            onPressed: () {
+              showModalBottomSheet(
+                  barrierColor: const Color.fromARGB(82, 45, 45, 45),
+                  context: context,
+                  builder: (context) {
+                    return FilterWidget();
+                  });
+            },
+          )
         ],
       ),
     );
