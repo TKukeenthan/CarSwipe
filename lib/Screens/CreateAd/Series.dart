@@ -1,18 +1,16 @@
 // ignore_for_file: file_names
 
-import 'package:carswipe/Config/appConfig.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../Config/appSize.dart';
-import '../../Provider/CarTypeProvider.dart';
 
 class SeriesOption extends StatefulWidget {
   final List<String> carTypes;
   final String TitleText;
   final bool ShowCheckBox;
   final bool ShowLogo;
-  final String ImageUrl;
+  final List<String> ImageUrl;
+  final Function(int index) onCarTypeSelected;
   // Add t
   const SeriesOption({
     super.key,
@@ -21,6 +19,7 @@ class SeriesOption extends StatefulWidget {
     required this.ShowCheckBox,
     required this.ShowLogo,
     required this.ImageUrl,
+    required this.onCarTypeSelected,
   });
 
   @override
@@ -30,7 +29,6 @@ class SeriesOption extends StatefulWidget {
 class _SeriesOptionState extends State<SeriesOption> {
   @override
   Widget build(BuildContext context) {
-    final carTypeProvider = Provider.of<CarTypeProvider>(context);
     return Container(
       width: screenWidth(context, 393),
       decoration: const BoxDecoration(
@@ -67,11 +65,7 @@ class _SeriesOptionState extends State<SeriesOption> {
                 ),
                 TypeCarsSelector(
                   carTypes: widget.carTypes,
-                  onCarTypeSelected: (selectedIdx) {
-                    carTypeProvider
-                        .updateSelectedCarType(widget.carTypes[selectedIdx]);
-                    setState(() {});
-                  },
+                  onCarTypeSelected: widget.onCarTypeSelected,
                   ShowCheckBox: widget.ShowCheckBox,
                   ShowLogo: widget.ShowLogo,
                   ImageUrl: widget.ImageUrl,
@@ -91,7 +85,7 @@ class TypeCars extends StatelessWidget {
   final VoidCallback onTap;
   final bool ShowCheckBox;
   final bool ShowLogo;
-  final String imageUrl;
+  final String? imageUrl;
 
   const TypeCars({
     super.key,
@@ -100,7 +94,7 @@ class TypeCars extends StatelessWidget {
     required this.onTap,
     required this.ShowCheckBox,
     required this.ShowLogo,
-    required this.imageUrl,
+    this.imageUrl,
   });
 
   @override
@@ -121,10 +115,13 @@ class TypeCars extends StatelessWidget {
           child: Row(
             children: [
               if (ShowCheckBox) Checkbox(value: true, onChanged: (t) {}),
-              if (ShowLogo)
+              if (imageUrl != null &&
+                  imageUrl != '' &&
+                  imageUrl!.isNotEmpty &&
+                  ShowLogo == true)
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(imageUrl),
+                  child: Image.asset(imageUrl ?? ''),
                 ),
               Text(
                 type,
@@ -145,7 +142,7 @@ class TypeCarsSelector extends StatefulWidget {
   final void Function(int selectedIdx) onCarTypeSelected;
   final bool ShowCheckBox;
   final bool ShowLogo;
-  final String ImageUrl;
+  final List<String> ImageUrl;
   TypeCarsSelector(
       {super.key,
       required this.carTypes,
@@ -182,7 +179,7 @@ class _TypeCarsSelectorState extends State<TypeCarsSelector> {
           },
           ShowCheckBox: widget.ShowCheckBox,
           ShowLogo: widget.ShowLogo,
-          imageUrl: widget.ImageUrl,
+          imageUrl: widget.ImageUrl[index],
         );
       }).toList(),
     );

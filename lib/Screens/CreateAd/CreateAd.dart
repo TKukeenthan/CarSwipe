@@ -1,4 +1,3 @@
-import 'package:carswipe/Screens/CreateAd/BrandOption.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../Config/appSize.dart';
 import '../../Provider/CarTypeProvider.dart';
 import '../../ReUsableWidget/SelectFieldWidget.dart';
-import 'Series.dart';
 import 'Widgets/ConditionWidget.dart';
 import 'Widgets/Description.dart';
 import 'Widgets/PowerWidget.dart';
@@ -21,8 +19,33 @@ class CreateAd extends StatefulWidget {
 }
 
 class _CreateAdState extends State<CreateAd> {
+  List<String> Series = ['X1', 'X2', 'X3'];
+  List<String> Fuels = [
+    'Gasoline',
+    'Diesel',
+    'Electric',
+    'Gasoline',
+    'Diesel',
+    'Electric',
+    'Gasoline',
+    'Diesel',
+    'Electric'
+  ];
+
+  List<String> Body = [
+    'Compact',
+    'Convertible',
+    'Coupe',
+    'SUV/Off-road/Pickup',
+    'Station wagon',
+    'Sedans',
+    'Vans',
+    'Transporters',
+    'Electric'
+  ];
   @override
   Widget build(BuildContext context) {
+    final carTypeProvider = Provider.of<CarTypeProvider>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -39,60 +62,50 @@ class _CreateAdState extends State<CreateAd> {
                     color: Color(0xff6B6C6D),
                   )),
             ),
-            const SelectField(
+            SelectField(
               TitleText: 'Brands',
               insideText: 'Select the brand of the car',
               carTypes: [],
               CarTypeTitle: '',
-              IsBrand: true, ShowCheckBox: false, ShowLogo: false, ImageUrl: '',
+              IsBrand: true, ShowCheckBox: false, ShowLogo: false, ImageUrl: [],
+              onCarTypeSelected: (index) {},
               // Pass the callback
             ),
-            const SelectField(
+            SelectField(
               TitleText: 'Series',
-              insideText: 'Select the series',
-              carTypes: ['X1', 'X2', 'X3'],
+              insideText: carTypeProvider.selectedSeriesType,
+              carTypes: Series,
               CarTypeTitle: 'Series',
               IsBrand: false, ShowCheckBox: false, ShowLogo: false,
-              ImageUrl: '',
+              ImageUrl: [],
+              onCarTypeSelected: (index) {
+                carTypeProvider.updateSelectedSeriesType(Series[index]);
+              },
               // Pass the callback
             ),
-            const SelectField(
+            SelectField(
               TitleText: 'Fuel Type',
-              insideText: 'Select the fuel type',
-              carTypes: [
-                'Gasoline',
-                'Diesel',
-                'Electric',
-                'Gasoline',
-                'Diesel',
-                'Electric',
-                'Gasoline',
-                'Diesel',
-                'Electric'
-              ],
+              insideText: carTypeProvider.selectedFuelType,
+              carTypes: Fuels,
               CarTypeTitle: 'Fuel Type',
               IsBrand: false,
               ShowCheckBox: false,
               ShowLogo: false,
-              ImageUrl: '',
+              ImageUrl: [],
+              onCarTypeSelected: (index) {
+                carTypeProvider.updateSelectedFuelType(Fuels[index]);
+              },
             ),
-            const SelectField(
+            SelectField(
               TitleText: 'Body Type',
-              insideText: 'Select the body Type',
-              carTypes: [
-                'Compact',
-                'Convertible',
-                'Coupe',
-                'SUV/Off-road/Pickup',
-                'Station wagon',
-                'Sedans',
-                'Vans',
-                'Transporters',
-                'Electric'
-              ],
+              insideText: carTypeProvider.selectedBodyType,
+              carTypes: Body,
               CarTypeTitle: 'Body',
               IsBrand: false, ShowCheckBox: false, ShowLogo: false,
-              ImageUrl: '',
+              ImageUrl: [],
+              onCarTypeSelected: (index) {
+                carTypeProvider.updateSelectedBodyType(Body[index]);
+              },
               // Pass the callback
             ),
             ConditionWidget(),

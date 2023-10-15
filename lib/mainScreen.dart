@@ -1,3 +1,4 @@
+import 'package:carswipe/Screens/WishList/filter/Filter.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/CreateAd/CreateAd.dart';
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   final _screens = [
     CreateAd(),
     const WishlistScreen(),
-    Container(),
+    FilterWidget(),
     Container(),
   ];
 

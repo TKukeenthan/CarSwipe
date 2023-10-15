@@ -13,7 +13,8 @@ class SelectField extends StatefulWidget {
   final bool IsBrand;
   final bool ShowCheckBox;
   final bool ShowLogo;
-  final String ImageUrl;
+  final List<String> ImageUrl;
+  final Function(int index) onCarTypeSelected;
 // Add the callback
   const SelectField({
     super.key,
@@ -25,6 +26,7 @@ class SelectField extends StatefulWidget {
     required this.ShowCheckBox,
     required this.ShowLogo,
     required this.ImageUrl,
+    required this.onCarTypeSelected,
   });
 
   @override
@@ -66,6 +68,7 @@ class _SelectFieldState extends State<SelectField> {
                           ShowCheckBox: widget.ShowCheckBox,
                           ShowLogo: widget.ShowLogo,
                           ImageUrl: widget.ImageUrl,
+                          onCarTypeSelected: widget.onCarTypeSelected,
                         );
                 },
               );
