@@ -89,6 +89,7 @@ flutter:
 
     #Filter
     - assets/filter/Brand Logo.png
+    - assets/filter/radix-icons_cross-circled.svg
 
   #   - images/a_dot_ham.jpeg
 
